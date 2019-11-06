@@ -811,6 +811,21 @@ legend {
 }
 
 .s003 {
+  min-height: 10vh;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  font-family: 'Poppins', sans-serif;
+  background-color: #a598ee;
+  background-size: cover;
+  background-position: center center;
+  padding: 15px;
+}
+
+.my-table {
   min-height: 100vh;
   display: -ms-flexbox;
   display: flex;

@@ -10,9 +10,15 @@
   <style>
     #myTable {
       border-collapse: collapse;
-      width: 100%;
-      border: 1px solid #ddd;
+      width: 70%;
+      border: 1px solid black;
       font-size: 18px;
+      margin-left:auto;
+      margin-right:auto;
+      border-color: #fff;
+      margin-top: 2px;
+      border-radius: 4px;
+      box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
     }
 
     #myTable th, #myTable td {
@@ -21,7 +27,9 @@
     }
 
     #myTable tr {
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #f1f1f1;
+      background: transparent;
+      background-color: #f1f1f1;
     }
 
     #myTable tr.header, #myTable tr:hover {
@@ -35,13 +43,13 @@
         <div class="inner-form">
           <div class="input-field first-wrap">
             <div class="input-select">
-              <select data-trigger="" name="choices-single-defaul">
+              <select data-trigger="" name="choices-single-defaul" class="keytype">
                 <option placeholder="">Category</option>
-                <option>New Arrivals</option>
-                <option>Sale</option>
-                <option>Ladies</option>
-                <option>Men</option>
-                <option>Hot Trend</option>
+                <option>Brand</option>
+                <!-- <option>Sale</option> -->
+                <!-- <option>Ladies</option>
+                <option>Men</option> -->
+                <!-- <option>Hot Trend</option> -->
               </select>
             </div>
           </div>
@@ -58,16 +66,20 @@
         </div>
       </form>
     </div>
-    <table id="myTable">
-        <tr class="header">
+    <div class="my-table">
+      <table id="myTable">
+        <tr class="header first-wrap input-field" >
             <th>Brand</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Image</th>
             <th>Category</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>Price($)</th>
             <th>Sold out</th>
         </tr>
-    </table>
+      </table>
+    </div>
+    
+    
         <script src="js/extention/choices.js"></script>
     <script>
       const choices = new Choices('[data-trigger]',
@@ -78,28 +90,33 @@
 
     </script>
     <script>
-      $("#demo").click(function(){
-        // alert("Success");
+      $(document).ready(function(){
+        $("#demo").click(function(){
+        var selectedKeytype = $("select.keytype").children("option:selected").val();
+        // alert("You have selected the keytype - " + selectedKeytype);
+        var keyword = document.getElementById("timkiem").value;
+        console.log(keyword);
         $.ajax({
-          url: "search",
-          type: "post",
-          contentType: "application/json",
-          data: JSON.stringify({content: document.getElementById("timkiem").value}),
+          url: `/api/db/products/get-${selectedKeytype.toLowerCase()}/${keyword}`,
+          type: "get",
+          // contentType: "application/json",
+          // data: JSON.stringify({content: keyword, keytype:selectedKeytype}),
           success: function(data){
             console.log(data.results);
             for (var i=0; i < data.results.length; i++){
               $("#myTable").append(`
                 <tr>
-                  <td>${data.results[i].name}</td>
-                  <td>${data.results[i].price}</td>
+                  <td>${data.results[i].brand_name}</td>
+                  <td>${data.results[i].category_name}</td>
+                  <td><img src="${data.results[i].image}" height=100 width=100></td>
                   <td>${data.results[i].description}</td>                  
-                  <td>${data.results[i].image}</td>
-                  <td>${data.results[i].category}</td>
+                  <td>${data.results[i].price}</td>
                   <td>${data.results[i].sold_out}</td>
                 </tr>
               `)
               }
-          }
+            }
+          })
         })
       })
       </script>
