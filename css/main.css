@@ -825,6 +825,13 @@ legend {
   padding: 15px;
 }
 
+.my-app{
+  background-color: #a598ee;
+  background-size: cover;
+  background-position: center center;
+  padding: 15px;
+}
+
 .my-table {
   min-height: 100vh;
   display: -ms-flexbox;
