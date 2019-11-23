@@ -1,0 +1,125 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="Nhom9" content="ltct.com">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+</head>
+
+<style>
+    #info {
+        float: left;
+        margin: 50px 200px;
+        text-align: left;
+        line-height: 1.8;
+        font-size: 150%;
+
+    }
+
+    #image {
+        /* padding-left : 16px;  */
+        float: left;
+        transition: .15s all ease-in-out;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.19);
+        display: flex;
+        margin: 30px 30px;
+        position: relative;
+        left: 30px;
+    }
+
+    #myBtn {
+        padding: 15px 32px;
+        background-color: #4CAF50;
+        /* Green */
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 50px 100px;
+        cursor: pointer;
+
+    }
+
+    #myApp {
+        display: inline;
+    }
+
+    body {
+        background-color: #a598ee;
+    }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<body>
+    <div id="myApp">
+
+        <div>
+            <image id="image" style="width:300px;height:400px;"> </image>
+        </div>
+
+        <div>
+            <div id="info" class="first"></div>
+            <button id="myBtn" class="second">Add to cart</button>
+        </div>
+    </div>
+
+
+</body>
+
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+            url: `https://nguyenvd27-ltct-demo.herokuapp.com/api/categories`,
+            type: "get",
+            success: function (data) {
+                category_list = data.data;
+            }
+        })
+
+        $.ajax({
+            url: `https://nguyenvd27-ltct-demo.herokuapp.com/api/brands`,
+            type: "get",
+            success: function (data) {
+                brand_list = data.data;
+            }
+        })
+
+        var id = 0;
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('?');
+        for (var i = 0; i < sURLVariables.length; i++) {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == 'product_id') {
+                // alert(sParameterName[1]);
+                id = parseInt(sParameterName[1]);
+                $.ajax({
+                    url: `https://nguyenvd27-ltct-demo.herokuapp.com/api/products/${id}`,
+                    type: "get",
+                    success: function (data) {
+                        product = data.data
+                        console.log(product);
+                        $("#info").append(`<div id="productName">${product[0].name}</div>
+                    <div id="brand">Brand: ${product[0].brand}</div>
+                    <div id="category">Category: ${product[0].category}</div>
+                    <div id="price">Price: ${product[0].price}</div>
+                    <div id="description">Description: ${product[0].description}</div>
+                    <hr>
+                    `);
+                        $("#image").attr("src", product[0].image);
+                    }
+                })
+                break;
+            }
+        }
+    });
+</script>
+
+
+</html>
