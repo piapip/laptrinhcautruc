@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 var {Pool,Client} = require("pg");
 const router = express.Router();
-app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/..'));
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
