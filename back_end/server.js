@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/..'));
 
 var {Pool,Client} = require("pg");
 
@@ -19,7 +19,7 @@ var pool = new Pool({
 })
 
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, '/front_end/index.html'));
 });
 
 app.listen(process.env.PORT || 5000, function () {
