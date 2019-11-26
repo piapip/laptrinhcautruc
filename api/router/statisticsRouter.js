@@ -2,7 +2,7 @@ const express = require('express');
 const statisticsRouter = express.Router();
 const axios = require('axios');
 
-statisticsRouter.get("/get-latest", (req, res) => {
+statisticsRouter.get("/", (req, res) => {
   axios
     .get("https://nguyenvd27-ltct-demo.herokuapp.com/api/products/")
     .then(data => {
@@ -17,7 +17,7 @@ statisticsRouter.get("/get-latest", (req, res) => {
     .catch(error => res.status(400).err(error))
 })
 
-statisticsRouter.get("/get-latest/:productName", (req, res) => {
+statisticsRouter.get("/:productName", (req, res) => {
   axios
     .get("https://nguyenvd27-ltct-demo.herokuapp.com/api/products/")
     .then(data => {

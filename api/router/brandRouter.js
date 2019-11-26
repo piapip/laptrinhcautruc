@@ -2,7 +2,7 @@ const express = require('express');
 const brandRouter = express.Router();
 const axios = require('axios');
 
-brandRouter.get("/get-brand-list", (req, res) => {
+brandRouter.get("/", (req, res) => {
   axios
     .get('https://nguyenvd27-ltct-demo.herokuapp.com/api/brands')
     .then(data => {
@@ -11,7 +11,7 @@ brandRouter.get("/get-brand-list", (req, res) => {
     .catch(error => res.status(400).err(error))
 })
 
-brandRouter.get("/get-brand/:brandName", (req, res) => {
+brandRouter.get("/:brandName", (req, res) => {
   axios
     .get('https://nguyenvd27-ltct-demo.herokuapp.com/api/brands')
     .then(data => {

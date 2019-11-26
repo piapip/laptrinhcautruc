@@ -2,7 +2,7 @@ const express = require('express');
 const categoryRouter = express.Router();
 const axios = require('axios');
 
-categoryRouter.get("/get-category-list", (req, res) => {
+categoryRouter.get("/", (req, res) => {
   axios
     .get('https://nguyenvd27-ltct-demo.herokuapp.com/api/categories')
     .then(data => {
@@ -11,7 +11,7 @@ categoryRouter.get("/get-category-list", (req, res) => {
     .catch(error => res.status(400).send(error))
 })
 
-categoryRouter.get("/get-category/:categoryName", (req, res) => {
+categoryRouter.get("/:categoryName", (req, res) => {
   axios
     .get('https://nguyenvd27-ltct-demo.herokuapp.com/api/categories')
     .then(data => {

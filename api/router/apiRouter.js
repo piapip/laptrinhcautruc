@@ -11,11 +11,12 @@ apiRouter.use("/", (req,res,next)=>{
   next();
 });
 
-apiRouter.use("/db/products", brandRouter);
-apiRouter.use("/db/products", categoryRouter);
-apiRouter.use("/db/products", priceRouter);
-apiRouter.use("/db/products", statisticsRouter);
+apiRouter.use("/db/products/brands", brandRouter);
+apiRouter.use("/db/products/categories", categoryRouter);
+apiRouter.use("/db/products/latest", statisticsRouter);
 apiRouter.use("/db/products", productsRouter);
 apiRouter.use("/user", authRouter);
+
+apiRouter.use("/db/products", priceRouter);
 
 module.exports = apiRouter;

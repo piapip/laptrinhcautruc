@@ -2,7 +2,7 @@ const express = require('express');
 const productsRouter = express.Router();
 const axios = require('axios');
 
-productsRouter.get("/get-id/:productID", (req, res) => {
+productsRouter.get("/id/:productID", (req, res) => {
   axios
     .get('https://nguyenvd27-ltct-demo.herokuapp.com/api/products/'+req.params.productID)
     .then(data => {
@@ -11,7 +11,7 @@ productsRouter.get("/get-id/:productID", (req, res) => {
     .catch(error => res.status(400).err(error))
 })
 
-productsRouter.get("/get-name/:productName", (req, res) => {
+productsRouter.get("/name/:productName", (req, res) => {
   axios
     .get('https://nguyenvd27-ltct-demo.herokuapp.com/api/products')
     .then(data => {
