@@ -11,15 +11,33 @@ class SearchSection extends Component {
     input: ''
   }
 
-  searchForBrand = (brandName) => {
+  searchForBrand = () => {
     axios
-      .get("localhost:8080/api/db/products/get-brand/"+ brandName)
+      .get("localhost:8080/api/db/products/get-brand/"+ this.state.input)
       .then((data) => {
         console.log(data)
       })
       .catch(error => console.log(error))
   }
   
+  searchForCategory = () => {
+    axios
+    .get("localhost:8080/api/db/products/get-category/"+ this.state.input)
+    .then((data) => {
+      console.log(data)
+    })
+    .catch(error => console.log(error))
+  }
+
+  searchForName = () => {
+    axios
+      .get("localhost:8080/api/db/products/get-name/"+ this.state.input)
+      .then((data) => {
+        console.log(data)
+      })
+      .catch(error => console.log(error))
+  }
+
   render() {
     return (
       <div>

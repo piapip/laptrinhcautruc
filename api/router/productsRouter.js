@@ -15,7 +15,7 @@ productsRouter.get("/get-name/:productName", (req, res) => {
   axios
     .get('https://nguyenvd27-ltct-demo.herokuapp.com/api/products')
     .then(data => {
-      let found = data.data.data.filter(element => element.name.includes(req.params.productName))      
+      let found = data.data.data.filter(element => element.name.toLowerCase().includes(req.params.productName.toLowerCase()))
       res.status(500).send(found)
     })
     .catch(error => res.status(400).err(error))

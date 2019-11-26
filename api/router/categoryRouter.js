@@ -15,12 +15,20 @@ categoryRouter.get("/get-category/:categoryName", (req, res) => {
   axios
     .get('https://nguyenvd27-ltct-demo.herokuapp.com/api/categories')
     .then(data => {
-      let found = data.data.data.filter(element => element.name.includes(req.params.categoryName))
-      return axios.get('https://nguyenvd27-ltct-demo.herokuapp.com/api/categories/' + found[0].id)
+      let found = data.data.data.filter(element => element.name.toLowerCase().includes(req.params.categoryName.toLowerCase()))
+      let promises = []
+      for (item of found) {
+        promises.push(axios.get('https://nguyenvd27-ltct-demo.herokuapp.com/api/categories/' + item.id));
+      }
+      return axios.all(promises)
     })
-    .then(data => {
-      res.status(500).send(data.data.productsOfCategory)
-    })
+    .then(axios.spread((...args) => {
+      result = []
+      for(request of args) {
+        result.push(request.data.productsOfCategory)
+      }
+      res.status(500).send(result)
+    }))
     .catch(error => res.status(400).err(error))
 })
 

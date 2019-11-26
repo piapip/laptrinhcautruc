@@ -15,4 +15,17 @@ priceRouter.get("/get-prices/:minPrice/:maxPrice", (req, res) => {
     .catch(error => res.status(400).err(error))
 }) 
 
+priceRouter.get("/get-prices/:minPrice/:maxPrice/:productName", (req, res) => {
+  axios
+    .get('https://nguyenvd27-ltct-demo.herokuapp.com/api/products')
+    .then(data => {
+      let found = data.data.data.filter(element => 
+        element.name.includes(req.params.productName)
+        && element.price >= req.params.minPrice 
+        && element.price <= req.params.maxPrice)
+      res.status(500).send(found)
+    })
+    .catch(error => res.status(400).err(error))
+})
+
 module.exports = priceRouter;
