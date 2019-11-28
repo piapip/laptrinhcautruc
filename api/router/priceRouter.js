@@ -10,9 +10,9 @@ priceRouter.get("/price/:minPrice/:maxPrice", (req, res) => {
         element => 
         element.price >= req.params.minPrice 
         && element.price <= req.params.maxPrice)
-      res.status(500).send(found)
+      res.status(201).send(found)
     })
-    .catch(error => res.status(400).err(error))
+    .catch(error => res.status(500).send(error))
 }) 
 
 priceRouter.get("/price/:minPrice/:maxPrice/:productName", (req, res) => {
@@ -23,9 +23,9 @@ priceRouter.get("/price/:minPrice/:maxPrice/:productName", (req, res) => {
         element.name.includes(req.params.productName)
         && element.price >= req.params.minPrice 
         && element.price <= req.params.maxPrice)
-      res.status(500).send(found)
+      res.status(201).send(found)
     })
-    .catch(error => res.status(400).err(error))
+    .catch(error => res.status(500).send(error))
 })
 
 module.exports = priceRouter;

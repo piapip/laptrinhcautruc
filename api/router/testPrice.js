@@ -20,9 +20,9 @@ testPrice.get('/:input/:minPrice/:maxPrice', (req, res) => {
       for(request of args) {
         result.push(request.data)
       }
-      res.status(500).send(result)
+      res.status(201).send(result)
     }))
-    .catch(error => res.status(400).err(error))
+    .catch(error => res.status(400).send(error))
 })
 
 module.exports = testPrice;

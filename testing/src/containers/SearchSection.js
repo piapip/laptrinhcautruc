@@ -13,7 +13,7 @@ class SearchSection extends Component {
 
   searchForBrand = () => {
     axios
-      .get("localhost:8080/api/db/products/get-brand/"+ this.state.input)
+      .get("localhost:8080/api/db/products/brands/"+ this.state.input)
       .then((data) => {
         console.log(data)
       })
@@ -22,7 +22,7 @@ class SearchSection extends Component {
   
   searchForCategory = () => {
     axios
-    .get("localhost:8080/api/db/products/get-category/"+ this.state.input)
+    .get("localhost:8080/api/db/products/categories/"+ this.state.input)
     .then((data) => {
       console.log(data)
     })

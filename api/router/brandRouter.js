@@ -10,9 +10,9 @@ brandRouter.get("/", (req, res) => {
   axios
     .get('https://nguyenvd27-ltct-demo.herokuapp.com/api/brands')
     .then(data => {
-      res.status(500).send(data.data.data)
+      res.status(200).send(data.data.data)
     })
-    .catch(error => res.status(400).err(error))
+    .catch(error => res.status(400).send(error))
 })
 
 brandRouter.get("/:brandName", (req, res) => {
@@ -29,9 +29,15 @@ brandRouter.get("/:brandName", (req, res) => {
     .then(axios.spread((...args) => {
       result = []
       for(request of args) {
-        result.push(request.data.productsOfBrand)
+        let block = {
+          brand: '',
+          products: []
+        }
+        block.brand = request.data.data[0].name
+        block.products = request.data.productsOfBrand
+        result.push(block)
       }
-      res.status(500).send(result)
+      res.status(200).send(result)
     }))
     .catch(error => res.status(400).send(error))
 })
