@@ -4,6 +4,11 @@ import Header from '../components/Header';
 import SearchSection from './SearchSection';
 
 class HomeScreen extends Component {
+
+  state = {
+    products: []
+  }
+
   render() {
     return (
       <div>

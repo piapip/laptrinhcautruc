@@ -2,10 +2,6 @@ const express = require('express');
 const brandRouter = express.Router();
 const axios = require('axios');
 
-// const testPrice = require('./testPrice');
-
-// brandRouter.use('/price', testPrice);
-
 brandRouter.get("/", (req, res) => {
   axios
     .get('https://nguyenvd27-ltct-demo.herokuapp.com/api/brands')
@@ -29,13 +25,7 @@ brandRouter.get("/:brandName", (req, res) => {
     .then(axios.spread((...args) => {
       result = []
       for(request of args) {
-        let block = {
-          brand: '',
-          products: []
-        }
-        block.brand = request.data.data[0].name
-        block.products = request.data.productsOfBrand
-        result.push(block)
+        result.push(request.data.products)
       }
       res.status(200).send(result)
     }))

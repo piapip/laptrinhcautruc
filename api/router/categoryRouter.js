@@ -25,14 +25,7 @@ categoryRouter.get("/:categoryName", (req, res) => {
     .then(axios.spread((...args) => {
       result = []
       for(request of args) {
-        let block = {
-          category: '',
-          products: []
-        }
-        block.category = request.data.data[0].name
-        block.products = request.data.productsOfCategory
-        result.push(block)
-
+        result.push(request.data.products)
       }
       res.status(200).send(result)
     }))
