@@ -12,11 +12,10 @@ class HomeScreen extends Component {
   }
 
   componentDidMount = () => {
-
     if(this.props.match.params.userId) {
       let userId = this.props.match.params.userId
       let sessionId = this.props.match.params.sessionId
-      this.props.setSession(userId, sessionId)
+      this.props.setSession(sessionId, userId)
     }
 
     axios
@@ -31,8 +30,8 @@ class HomeScreen extends Component {
     return (
       <div>
         <Header 
-          user_id={this.props.user_id}
-          session_id={this.props.sessionId}/>
+          userId={this.props.userId}
+          sessionId={this.props.sessionId}/>
         <SearchSection />
         <ItemList 
           products = {this.state.products}/>
