@@ -1,48 +1,54 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { Form, Row, Col, Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 import SearchBar from '../components/SearchBar';
 import DropdownOption from '../components/DropdownOptions';
 
 class SearchSection extends Component {
-  
+
   state = {
-    option: 0,
-    input: ''
-  }
-
-  searchForBrand = () => {
-    axios
-      .get("localhost:8080/api/db/products/get-brand/"+ this.state.input)
-      .then((data) => {
-        console.log(data)
-      })
-      .catch(error => console.log(error))
+    input: '',
+    minPrice: 0,
+    maxPrice: 0,
+    option: 'misc' //0 - name, 1 - brand, 2 - category, 3 - priceOnly, 4 - price with product's name
   }
   
-  searchForCategory = () => {
-    axios
-    .get("localhost:8080/api/db/products/get-category/"+ this.state.input)
-    .then((data) => {
-      console.log(data)
-    })
-    .catch(error => console.log(error))
+  setInput = (input) => {
+    this.setState({ input })
   }
 
-  searchForName = () => {
-    axios
-      .get("localhost:8080/api/db/products/get-name/"+ this.state.input)
-      .then((data) => {
-        console.log(data)
-      })
-      .catch(error => console.log(error))
+  setOption = (option) => {
+    this.setState({ option })
+  }
+
+  setMinPrice = (minPrice) => {
+    this.setState({ minPrice })
+  }
+
+  setMaxPrice = (maxPrice) => {
+    this.setState({ maxPrice })
   }
 
   render() {
     return (
       <div>
-        <SearchBar />
-        <DropdownOption />
+        <Form> 
+          <Row form>
+            <Col md={2}> 
+              <DropdownOption setOption = {this.setOption}/>
+            </Col>
+            <Col md={6}>
+              <SearchBar 
+                setMinPrice = {this.setMinPrice}
+                setMaxPrice = {this.setMaxPrice}
+                setInput = {this.setInput}/>
+            </Col>
+          </Row>
+            <Link to={`/option/${this.state.option}/product/${this.state.input}`}>  
+              <Button>Find</Button>
+            </Link>
+        </Form>
       </div>
     );
   }

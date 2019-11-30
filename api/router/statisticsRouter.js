@@ -12,9 +12,9 @@ statisticsRouter.get("/", (req, res) => {
       let result = []
       for (key in sortedData)
         result.push(data.data.data[sortedData[key]])
-      res.status(500).send(result)
+      res.status(201).send(result)
     })
-    .catch(error => res.status(400).err(error))
+    .catch(error => res.status(500).send(error))
 })
 
 statisticsRouter.get("/:productName", (req, res) => {
@@ -29,9 +29,9 @@ statisticsRouter.get("/:productName", (req, res) => {
       let result = []
       for (key in sortedData)
         result.push(filteredData[sortedData[key]])
-      res.status(500).send(result)
+      res.status(201).send(result)
     })
-    .catch(error => res.status(400).err(error))
+    .catch(error => res.status(500).send(error))
 })
 
 module.exports = statisticsRouter;
