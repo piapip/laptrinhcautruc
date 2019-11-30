@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Form, Row, Col, Button } from 'reactstrap';
 
+import { Link } from 'react-router-dom';
+
 import SearchBar from '../components/SearchBar';
 import DropdownOption from '../components/DropdownOptions';
 
@@ -11,7 +13,7 @@ class SearchSection extends Component {
     input: '',
     minPrice: 0,
     maxPrice: 0,
-    option: '' //0 - name, 1 - brand, 2 - category, 3 - priceOnly, 4 - price with product's name
+    option: 'misc' //0 - name, 1 - brand, 2 - category, 3 - priceOnly, 4 - price with product's name
   }
   
   setInput = (input) => {
@@ -85,7 +87,9 @@ class SearchSection extends Component {
                 setInput = {this.setInput}/>
             </Col>
           </Row>
-          <Button>Find</Button>
+            <Link to={`/option/${this.state.option}/product/${this.state.input}`}>  
+              <Button>Find</Button>
+            </Link>
         </Form>
       </div>
     );

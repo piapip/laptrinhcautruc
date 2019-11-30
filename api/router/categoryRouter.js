@@ -2,6 +2,10 @@ const express = require('express');
 const categoryRouter = express.Router();
 const axios = require('axios');
 
+const testPrice = require('./testPrice')
+
+categoryRouter.use('/price', testPrice)
+
 categoryRouter.get("/", (req, res) => {
   axios
     .get('https://nguyenvd27-ltct-demo.herokuapp.com/api/categories')

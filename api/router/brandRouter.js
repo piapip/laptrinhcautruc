@@ -2,6 +2,10 @@ const express = require('express');
 const brandRouter = express.Router();
 const axios = require('axios');
 
+const testPrice = require('./testPrice');
+
+brandRouter.use("/price", testPrice)
+
 brandRouter.get("/", (req, res) => {
   axios
     .get('https://nguyenvd27-ltct-demo.herokuapp.com/api/brands')
