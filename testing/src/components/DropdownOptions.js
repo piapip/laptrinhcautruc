@@ -31,7 +31,6 @@ class DropdownOptions extends Component {
   render() {
     return (
       <FormGroup>
-        {/* <Label for="exampleSelect">Options</Label> */}
         <Input type="select" name="select" id="option" onChange={this.onChangeSet}>
           <option></option>
           <option>Name</option>

@@ -3,19 +3,21 @@ import axios from 'axios';
 
 import SearchSection from './SearchSection';
 import Header from '../components/Header';
-import ItemList from '../components/ItemList'
+import ItemList from '../components/ItemList';
 
-class HomeScreen extends Component {
+class ResultScreen extends Component {
 
   state = {
     products: []
   }
 
   componentDidMount = () => {
+    let option = this.props.match.params.optionId
+    let input = this.props.match.params.input
     axios
-      .get('http://localhost:8080/api/db/products/latest')
+      .get(`http://localhost:8080/api/db/products/${option}/${input}`)
       .then(data => {
-        this.setState({ products : data.data })
+        this.setState({ products: data.data })
       })
       .catch(error => console.log(error))
   }
@@ -32,4 +34,4 @@ class HomeScreen extends Component {
   }
 }
 
-export default HomeScreen;
+export default ResultScreen;

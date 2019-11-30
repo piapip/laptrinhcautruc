@@ -7,9 +7,6 @@ class SearchBar extends Component {
     return (
       <FormGroup>
         <Input onChange={e => this.props.setInput(e.target.value)}/>
-        {/* <Label for="input">Input without validation</Label> */}
-        {/* <Input invalid /> */}
-        {/* <FormFeedback>Can't be blanked</FormFeedback> */}
       </FormGroup>
     );
   }

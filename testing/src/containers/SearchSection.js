@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Form, Row, Col, Button } from 'reactstrap';
-
 import { Link } from 'react-router-dom';
 
 import SearchBar from '../components/SearchBar';
@@ -30,46 +28,6 @@ class SearchSection extends Component {
 
   setMaxPrice = (maxPrice) => {
     this.setState({ maxPrice })
-  }
-
-  searchForBrand = (input) => {
-    axios
-      .get("localhost:8080/api/db/products/brands/"+ input)
-      .then((data) => {
-        console.log(data)
-      })
-      .catch(error => console.log(error))
-  }
-  
-  searchForCategory = (input) => {
-    axios
-    .get("localhost:8080/api/db/products/categories/"+ input)
-    .then((data) => {
-      console.log(data)
-    })
-    .catch(error => console.log(error))
-  }
-
-  searchForName = (input) => {
-    axios
-      .get("localhost:8080/api/db/products/name/"+ input)
-      .then((data) => {
-        console.log(data)
-      })
-      .catch(error => console.log(error))
-  }
-
-  searchForPrice = (input, minPrice, maxPrice) => {
-    let apiLink = "localhost:8080/api/db/products/price/"+ minPrice + "/" + maxPrice
-    if(input !== '') {
-      apiLink = apiLink + "/" + input
-    }
-    axios
-      .get(apiLink)
-      .then((data) => {
-        console.log(data)
-      })
-      .catch(error => console.log(error))
   }
 
   render() {

@@ -4,7 +4,8 @@ import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import HomeScreen from './containers/HomeScreen';
-import DetailedScreen from './containers/DetailedScreen';
+import ResultDetailedScreen from './containers/ResultDetailedScreen';
+import ItemDetailedScreen from './containers/ItemDetailedScreen';
 
 class App extends Component {   
   render() {
@@ -17,7 +18,11 @@ class App extends Component {
             }} />
           <Route path='/option/:optionId/product/:input' 
             render={(props) => {
-              return <DetailedScreen {...props} />
+              return <ResultDetailedScreen {...props} />
+            }}/>
+          <Route path='/product/:itemName'
+            render={(props) => {
+              return <ItemDetailedScreen {...props} />
             }}/>
         </BrowserRouter>
       </div>
