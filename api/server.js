@@ -4,6 +4,7 @@ const session = require('express-session');
 const cors = require('cors');
 
 const apiRouter = require('./router/apiRouter');
+const authRouter = require('./router/authRouter');
 
 let app = express();
 app.use(cors())
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use("/api", apiRouter);
+app.use('/setsession', authRouter);
 
 const port = 8080;
 app.listen(port, (err) => {

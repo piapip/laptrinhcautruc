@@ -28,7 +28,11 @@ testPrice.get('/:minPrice/:maxPrice/:input', (req, res) => {
             element => element.price >= req.params.minPrice && element.price <= req.params.maxPrice
           )
         }
-        if (found.length > 0) result.push(found)
+        if (found.length > 0) {
+          for (item of found) {
+            result.push(item)
+          }
+        }
       }
       res.status(201).send(result)
     }))

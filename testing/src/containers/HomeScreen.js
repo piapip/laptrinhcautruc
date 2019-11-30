@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import SearchSection from './SearchSection';
+import SearchSection from '../components/SearchSection';
 import Header from '../components/Header';
 import ItemList from '../components/ItemList'
 
@@ -12,6 +12,13 @@ class HomeScreen extends Component {
   }
 
   componentDidMount = () => {
+
+    if(this.props.match.params.userId) {
+      let userId = this.props.match.params.userId
+      let sessionId = this.props.match.params.sessionId
+      this.props.setSession(userId, sessionId)
+    }
+
     axios
       .get('http://localhost:8080/api/db/products/latest')
       .then(data => {
@@ -23,7 +30,9 @@ class HomeScreen extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header 
+          user_id={this.props.user_id}
+          session_id={this.props.sessionId}/>
         <SearchSection />
         <ItemList 
           products = {this.state.products}/>
