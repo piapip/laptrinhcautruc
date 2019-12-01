@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-import axios from 'axios'
+import axios from '../axios'
 import ShowItem from '../components/ShowItem';
+import Header from '../components/Header'
 
 class ItemDetailedScreen extends Component {
   state = {
@@ -15,22 +16,46 @@ class ItemDetailedScreen extends Component {
     axios
       .get('http://localhost:8080/api/db/products/name/' + itemName)
       .then(data => {
-        this.setState({ product: data.data })
+        this.setState({ product: data.data[0] })
       })
       .catch(error => console.log(error))
   }
 
+  addToCart = () => {
+    if(!this.props.userId) {
+      console.log("yopyop")
+    } else {
+      let userId = this.props.userId
+      let itemId = this.state.product.id
+      console.log(userId)
+      console.log(itemId)
+    }
+  }
+
   render() {
+    const addToCartButton = this.props.userId ? (
+      <div>
+        <Button onClick={this.addToCart}>Add to your cart</Button>
+      </div>
+    ) : (
+      <div>
+        <a href='http://secure-mountain-93147.herokuapp.com/requirelogin?url=http://localhost:8080/api'>
+          <Button>Add to your cart</Button>
+        </a>
+      </div>
+    )
     return (
       <div>
+        <Header 
+          setSession = {this.props.setSession}
+          userId={this.props.userId}
+          sessionId={this.props.sessionId}/>
         <ShowItem 
           product={this.state.product}/>
-          <div>
-            <Button>Add to the cart</Button>
-          </div>
-          <Link to={`/`}>
-            <Button>Back</Button>
-          </Link>
+        {addToCartButton}
+        <Link to={`/`}>
+          <Button>Back</Button>
+        </Link>
       </div>
     );
   }

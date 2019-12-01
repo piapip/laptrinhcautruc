@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from '../axios';
 import { Link } from 'react-router-dom'
 import { Button } from 'reactstrap'
 
 import ItemList from '../components/ItemList';
+import Header from '../components/Header'
 
 class ResultScreen extends Component {
 
@@ -35,6 +36,10 @@ class ResultScreen extends Component {
   render() {
     return (
       <div>
+        <Header 
+          setSession = {this.props.setSession}
+          userId={this.props.userId}
+          sessionId={this.props.sessionId}/>
         <Link to={`/`}>
           <Button>Back</Button>
         </Link>

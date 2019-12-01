@@ -11,7 +11,7 @@ class SearchSection extends Component {
     input: '',
     minPrice: 0,
     maxPrice: 100000000,
-    option: 'misc' //0 - name, 1 - brand, 2 - category, 3 - priceOnly, 4 - price with product's name
+    option: 'misc' 
   }
   
   setInput = (input) => {

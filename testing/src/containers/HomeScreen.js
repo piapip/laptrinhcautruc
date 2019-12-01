@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from '../axios';
 
 import SearchSection from '../components/SearchSection';
 import Header from '../components/Header';
 import ItemList from '../components/ItemList'
+import config from '../config'
 
 class HomeScreen extends Component {
 
@@ -12,14 +13,8 @@ class HomeScreen extends Component {
   }
 
   componentDidMount = () => {
-    if(this.props.match.params.userId) {
-      let userId = this.props.match.params.userId
-      let sessionId = this.props.match.params.sessionId
-      this.props.setSession(sessionId, userId)
-    }
-
     axios
-      .get('http://localhost:8080/api/db/products/latest')
+      .get(`${config.NHOM9}/api/db/products/latest`)
       .then(data => {
         this.setState({ products : data.data })
       })
@@ -30,6 +25,7 @@ class HomeScreen extends Component {
     return (
       <div>
         <Header 
+          setSession = {this.props.setSession}
           userId={this.props.userId}
           sessionId={this.props.sessionId}/>
         <SearchSection />

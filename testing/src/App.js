@@ -6,7 +6,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import HomeScreen from './containers/HomeScreen';
 import ResultDetailedScreen from './containers/ResultDetailedScreen';
 import ItemDetailedScreen from './containers/ItemDetailedScreen';
-import axios from 'axios';
+import axios from './axios';
+import config from './config';
 
 class App extends Component {   
 
@@ -14,15 +15,21 @@ class App extends Component {
 
   componentDidMount = () => {
     axios
-      .get('http://localhost:8080/setsession/isLogin')
+      .get(`${config.NHOM9}/api/isLogin`)
       .then(data => {
-        console.log(data.data)
+        if(data.data.success === 1) {
+          let sessionId = data.data.session.session_id
+          let userId = data.data.session.user_id
+          this.setSession(sessionId, userId)
+        } 
       })
       .catch(error => console.log(error))
-  }
+  } 
 
   setSession = (sessionId, userId) => {
-    this.setState({ sessionId, userId })
+    this.setState({ 
+      sessionId: sessionId, 
+      userId: userId })
   }
 
   render() {
@@ -55,14 +62,6 @@ class App extends Component {
               return <ItemDetailedScreen {...props}
               sessionId = {this.state.sessionId}
               userId = {this.state.sessionId} />
-            }}/>
-            
-          <Route path='/user_id/:userId/session_id/:sessionId'
-            render={(props) => {
-              return <HomeScreen {...props} 
-              sessionId = {this.state.sessionId}
-              userId = {this.state.sessionId}
-              setSession = {this.setSession}/>
             }}/>
         </BrowserRouter>
       </div>
