@@ -3,6 +3,7 @@ import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 import axios from '../axios'
+import config from '../config'
 import ShowItem from '../components/ShowItem';
 import Header from '../components/Header'
 
@@ -14,7 +15,7 @@ class ItemDetailedScreen extends Component {
   componentDidMount = () => {
     let itemName = this.props.match.params.itemName
     axios
-      .get('http://localhost:8080/api/db/products/name/' + itemName)
+      .get(`${config.BACKEND_NHOM9}/api/db/products/name/${itemName}`)
       .then(data => {
         this.setState({ product: data.data[0] })
       })
@@ -39,7 +40,7 @@ class ItemDetailedScreen extends Component {
       </div>
     ) : (
       <div>
-        <a href='http://secure-mountain-93147.herokuapp.com/requirelogin?url=http://localhost:8080/api'>
+        <a href={`${config.NHOM2}/requirelogin?url=${config.BACKEND_NHOM9}/api`}>
           <Button>Add to your cart</Button>
         </a>
       </div>

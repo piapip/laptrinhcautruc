@@ -15,7 +15,7 @@ class App extends Component {
 
   componentDidMount = () => {
     axios
-      .get(`${config.NHOM9}/api/isLogin`)
+      .get(`${config.BACKEND_NHOM9}/api/isLogin`)
       .then(data => {
         if(data.data.success === 1) {
           let sessionId = data.data.session.session_id

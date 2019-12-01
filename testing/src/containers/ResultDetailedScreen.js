@@ -5,6 +5,7 @@ import { Button } from 'reactstrap'
 
 import ItemList from '../components/ItemList';
 import Header from '../components/Header'
+import config from '../config'
 
 class ResultScreen extends Component {
 
@@ -17,7 +18,7 @@ class ResultScreen extends Component {
     let input = this.props.match.params.input
     let minPrice = this.props.match.params.minPrice
     let maxPrice = this.props.match.params.maxPrice
-    let apiLink = `http://localhost:8080/api/db/products`
+    let apiLink = `${config.BACKEND_NHOM9}/api/db/products`
     if(minPrice != null) {
       if(option !== 'name') apiLink = apiLink + `/${option}`
       apiLink = apiLink + `/price/${minPrice}/${maxPrice}/${input}`

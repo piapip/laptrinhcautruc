@@ -14,7 +14,7 @@ class HomeScreen extends Component {
 
   componentDidMount = () => {
     axios
-      .get(`${config.NHOM9}/api/db/products/latest`)
+      .get(`${config.BACKEND_NHOM9}/api/db/products/latest`)
       .then(data => {
         this.setState({ products : data.data })
       })
