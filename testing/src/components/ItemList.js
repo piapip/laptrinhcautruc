@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import ItemIntro from './ItemIntro';
+import ShowItem from './ShowItem';
 
 class ItemList extends Component {
   render() {
@@ -9,7 +9,7 @@ class ItemList extends Component {
       ? this.props.products.map(product => (
         <div key={product.id}>
           <Link to={`/product/${product.name}`}>  
-            <ItemIntro 
+            <ShowItem 
               product = {product}/>    
           </Link>
         </div>

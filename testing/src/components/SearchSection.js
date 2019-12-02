@@ -10,8 +10,8 @@ class SearchSection extends Component {
   state = {
     input: '',
     minPrice: 0,
-    maxPrice: 0,
-    option: 'misc' //0 - name, 1 - brand, 2 - category, 3 - priceOnly, 4 - price with product's name
+    maxPrice: 100000000,
+    option: 'misc' 
   }
   
   setInput = (input) => {
@@ -31,21 +31,26 @@ class SearchSection extends Component {
   }
 
   render() {
+    let searchURL = `/option/${this.state.option}/product/${this.state.input}`
+    if(this.state.option !== 'misc' && (this.state.minPrice > 0 || this.state.maxPrice < 100000000)) {
+      searchURL = searchURL + `/price/${this.state.minPrice}/${this.state.maxPrice}`
+    } 
     return (
       <div>
         <Form> 
           <Row form>
             <Col md={2}> 
-              <DropdownOption setOption = {this.setOption}/>
+              <DropdownOption 
+                setOption = {this.setOption}
+                setMinPrice = {this.setMinPrice}
+                setMaxPrice = {this.setMaxPrice}/>
             </Col>
             <Col md={6}>
               <SearchBar 
-                setMinPrice = {this.setMinPrice}
-                setMaxPrice = {this.setMaxPrice}
                 setInput = {this.setInput}/>
             </Col>
           </Row>
-            <Link to={`/option/${this.state.option}/product/${this.state.input}`}>  
+            <Link to={searchURL}>  
               <Button>Find</Button>
             </Link>
         </Form>

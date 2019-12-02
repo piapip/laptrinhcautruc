@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { FormGroup, Input } from 'reactstrap';
+import { FormGroup, Input, Label } from 'reactstrap';
 
 class DropdownOptions extends Component {
   
-  onChangeSet = (event) => { 
+  onChangeOption = (event) => { 
     let option = ''
     switch(event.target.value) {
       case '': 
@@ -18,9 +18,6 @@ class DropdownOptions extends Component {
       case 'Category':
         option = 'categories'
         break;
-      case 'Price':
-        option = 'price'
-        break;
       default:
         option = 'misc'
         break;
@@ -28,16 +25,31 @@ class DropdownOptions extends Component {
     this.props.setOption(option);
   } 
 
+  onChangeMinPrice = (event) => {
+    this.props.setMinPrice(event.target.value)
+  }
+
+  onChangeMaxPrice = (event) => {
+    this.props.setMaxPrice(event.target.value)
+  }
+
   render() {
     return (
       <FormGroup>
-        <Input type="select" name="select" id="option" onChange={this.onChangeSet}>
-          <option></option>
-          <option>Name</option>
-          <option>Brand</option>
-          <option>Category</option>
-          <option>Price</option>
-        </Input>
+        <FormGroup>
+          <Input type="select" name="select" id="option" onChange={this.onChangeOption}>
+            <option></option>
+            <option>Name</option>
+            <option>Brand</option>
+            <option>Category</option>
+          </Input>
+        </FormGroup>
+
+        <FormGroup>
+          <Label for="price">Price</Label>
+          <Input type="number" name="minPrice" id="minPrice" placeholder="minPrice" onChange={this.onChangeMinPrice}/>
+          <Input type="number" name="maxPrice" id="maxPrice" placeholder="maxPrice" onChange={this.onChangeMaxPrice}/>
+        </FormGroup>
     </FormGroup>
     );
   }

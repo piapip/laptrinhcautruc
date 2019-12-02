@@ -1,17 +1,18 @@
 const express = require('express');
 const testPrice = express.Router();
 const axios = require('axios')
+const config = require('../config')
 
 testPrice.get('/:minPrice/:maxPrice/:input', (req, res) => {
   let path = req.connection.parser.incoming._parsedOriginalUrl.path.split("/")
   var dataSource = path[path.length - 5]
   axios
-    .get('https://nguyenvd27-ltct-demo.herokuapp.com/api/' + dataSource)
+    .get(`${config.NHOM3}/api/${dataSource}`)
     .then(data => {
       let found = data.data.data.filter(element => element.name.toLowerCase().includes(req.params.input.toLowerCase()))
       let promises = []
       for (item of found) {
-        promises.push(axios.get('https://nguyenvd27-ltct-demo.herokuapp.com/api/' + dataSource + '/' + item.id));
+        promises.push(axios.get(`${config.NHOM3}/api/${dataSource}/${item.id}`));
       }
       return axios.all(promises)
     })
@@ -28,7 +29,11 @@ testPrice.get('/:minPrice/:maxPrice/:input', (req, res) => {
             element => element.price >= req.params.minPrice && element.price <= req.params.maxPrice
           )
         }
-        if (found.length > 0) result.push(found)
+        if (found.length > 0) {
+          for (item of found) {
+            result.push(item)
+          }
+        }
       }
       res.status(201).send(result)
     }))

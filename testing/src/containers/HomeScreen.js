@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from '../axios';
 
-import SearchSection from './SearchSection';
+import SearchSection from '../components/SearchSection';
 import Header from '../components/Header';
 import ItemList from '../components/ItemList'
+import config from '../config'
 
 class HomeScreen extends Component {
 
@@ -13,7 +14,7 @@ class HomeScreen extends Component {
 
   componentDidMount = () => {
     axios
-      .get('http://localhost:8080/api/db/products/latest')
+      .get(`${config.BACKEND_NHOM9}/api/db/products/latest`)
       .then(data => {
         this.setState({ products : data.data })
       })
@@ -23,7 +24,10 @@ class HomeScreen extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header 
+          setSession = {this.props.setSession}
+          userId={this.props.userId}
+          sessionId={this.props.sessionId}/>
         <SearchSection />
         <ItemList 
           products = {this.state.products}/>

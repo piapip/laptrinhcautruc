@@ -1,6 +1,7 @@
 const express = require('express');
 const categoryRouter = express.Router();
 const axios = require('axios');
+const config = require('../config')
 
 const testPrice = require('./testPrice')
 
@@ -8,7 +9,7 @@ categoryRouter.use('/price', testPrice)
 
 categoryRouter.get("/", (req, res) => {
   axios
-    .get('https://nguyenvd27-ltct-demo.herokuapp.com/api/categories')
+    .get(`${config.NHOM3}/api/categories`)
     .then(data => {
       res.status(200).send(data.data.data)
     })
@@ -17,19 +18,21 @@ categoryRouter.get("/", (req, res) => {
 
 categoryRouter.get("/:categoryName", (req, res) => {
   axios
-    .get('https://nguyenvd27-ltct-demo.herokuapp.com/api/categories')
+    .get(`${config.NHOM3}/api/categories`)
     .then(data => {
       let found = data.data.data.filter(element => element.name.toLowerCase().includes(req.params.categoryName.toLowerCase()))
       let promises = []
-      for (item of found) {
-        promises.push(axios.get('https://nguyenvd27-ltct-demo.herokuapp.com/api/categories/' + item.id));
+      for (category of found) {
+        promises.push(axios.get(`${config.NHOM3}/api/categories/${category.id}`));
       }
       return axios.all(promises)
     })
     .then(axios.spread((...args) => {
       result = []
       for(request of args) {
-        result.push(request.data.products)
+        for(item of request.data.products) {
+          result.push(item)
+        }
       }
       res.status(200).send(result)
     }))
