@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 
+import { Link } from 'react-router-dom'
+
 class ShowItem extends Component {
   render() {
     return (
-      <div className="item_detailed">
-        <img 
+      <tr>
+        <td>
+        <Link to={`/product/${this.props.product.name}`}>  
+          <img height="50%"
           src={this.props.product.image} 
           alt={this.props.product.description}/>
-        <p>Name: {this.props.product.name}</p>
-        <p>Brand: {this.props.product.brand}</p>
-        <p>Category: {this.props.product.category}</p>
-        <p>Price: {this.props.product.price}</p>
-      </div>
+          </Link>
+          </td>
+        <td>{this.props.product.name}</td>
+        <td>{this.props.product.brand}</td>
+        <td>{this.props.product.category}</td>
+        <td>{this.props.product.price}</td>
+      </tr>
     );
   }
 }

@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 
 import axios from '../axios'
 import config from '../config'
-import ShowItem from '../components/ShowItem';
+import ItemList from '../components/ItemList';
 import Header from '../components/Header'
 
 class ItemDetailedScreen extends Component {
   state = {
-    product: {}
+    products: []  
   }
 
   componentDidMount = () => {
@@ -17,7 +17,7 @@ class ItemDetailedScreen extends Component {
     axios
       .get(`${config.BACKEND_NHOM9}/api/db/products/name/${itemName}`)
       .then(data => {
-        this.setState({ product: data.data[0] })
+        this.setState({ products: data.data })
       })
       .catch(error => console.log(error))
   }
@@ -51,8 +51,8 @@ class ItemDetailedScreen extends Component {
           setSession = {this.props.setSession}
           userId={this.props.userId}
           sessionId={this.props.sessionId}/>
-        <ShowItem 
-          product={this.state.product}/>
+        <ItemList 
+          products={this.state.products}/>
         {addToCartButton}
         <Link to={`/`}>
           <Button>Back</Button>
