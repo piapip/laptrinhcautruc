@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+import { Button, ButtonGroup } from 'reactstrap';
 
 import config from '../config';
 
@@ -7,22 +7,24 @@ class Header extends Component {
 
   render() {
     const showButton = this.props.userId ? (
-      <div>
-        <a href={`${config.NHOM2}/logout?url=${config.BACKEND_NHOM9}/api`}>
-          <Button onClick = {this.logout}>Logout</Button>
-        </a>
-      </div>
+      <ButtonGroup>
+        <Button >
+          <a href={`${config.NHOM2}/logout?url=${config.BACKEND_NHOM9}/api`}>Logout</a>
+        </Button>
+        <Button>Your cart</Button>
+      </ButtonGroup>
     ) : (
-      <div>
-        <a href={`${config.NHOM2}/requirelogin?url=${config.BACKEND_NHOM9}/api`}>
-          <Button>Login</Button>
-        </a>
-      </div>
+      <ButtonGroup>
+        <Button>
+          <a href={`${config.NHOM2}/requirelogin?url=${config.BACKEND_NHOM9}/api`}>Login</a>
+        </Button>
+      </ButtonGroup>
     )
     return (
       <div>
         {showButton}
       </div>
+        
     );
   }
 }

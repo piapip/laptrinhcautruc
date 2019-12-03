@@ -4,20 +4,20 @@ import { Link } from 'react-router-dom';
 
 import axios from '../axios'
 import config from '../config'
-import ShowItem from '../components/ShowItem';
+import ItemList from '../components/ItemList';
 import Header from '../components/Header'
 
 class ItemDetailedScreen extends Component {
   state = {
-    product: {}
+    products: []  
   }
 
   componentDidMount = () => {
-    let itemName = this.props.match.params.itemName
+    let itemId = this.props.match.params.itemId
     axios
-      .get(`${config.BACKEND_NHOM9}/api/db/products/name/${itemName}`)
+      .get(`${config.BACKEND_NHOM9}/api/db/products/id/${itemId}`)
       .then(data => {
-        this.setState({ product: data.data[0] })
+        this.setState({ products: data.data })
       })
       .catch(error => console.log(error))
   }
@@ -27,9 +27,11 @@ class ItemDetailedScreen extends Component {
       console.log("yopyop")
     } else {
       let userId = this.props.userId
-      let itemId = this.state.product.id
-      console.log(userId)
-      console.log(itemId)
+      let sessionId = this.props.sessionId
+      let itemId = this.state.products[0].id
+      console.log("User: " + userId)
+      console.log("sessionId: " + sessionId)
+      console.log("item: " + itemId)
     }
   }
 
@@ -51,8 +53,8 @@ class ItemDetailedScreen extends Component {
           setSession = {this.props.setSession}
           userId={this.props.userId}
           sessionId={this.props.sessionId}/>
-        <ShowItem 
-          product={this.state.product}/>
+        <ItemList 
+          products={this.state.products}/>
         {addToCartButton}
         <Link to={`/`}>
           <Button>Back</Button>

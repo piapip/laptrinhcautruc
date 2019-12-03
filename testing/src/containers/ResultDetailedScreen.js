@@ -28,7 +28,6 @@ class ResultScreen extends Component {
     axios
       .get(apiLink)
       .then(data => { 
-        console.log(data)
         this.setState({ products: data.data })
       })
       .catch(error => console.log(error))

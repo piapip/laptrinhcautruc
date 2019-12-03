@@ -40,28 +40,28 @@ class App extends Component {
             render={(props) => {
               return <HomeScreen {...props} 
                 sessionId = {this.state.sessionId}
-                userId = {this.state.sessionId}
+                userId = {this.state.userId}
                 setSession = {this.setSession}/>
             }} />
           <Route exact path='/option/:optionId/product/:input' 
             render={(props) => {
               return <ResultDetailedScreen {...props}
                 sessionId = {this.state.sessionId}
-                userId = {this.state.sessionId}/>
+                userId = {this.state.userId}/>
             }}/>
 
           <Route exact path='/option/:optionId/product/:input/price/:minPrice/:maxPrice' 
             render={(props) => {
               return <ResultDetailedScreen {...props}
               sessionId = {this.state.sessionId}
-              userId = {this.state.sessionId} />
+              userId = {this.state.userId} />
             }}/>
 
-          <Route path='/product/:itemName'
+          <Route path='/product/:itemId'
             render={(props) => {
               return <ItemDetailedScreen {...props}
               sessionId = {this.state.sessionId}
-              userId = {this.state.sessionId} />
+              userId = {this.state.userId} />
             }}/>
         </BrowserRouter>
       </div>
