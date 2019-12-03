@@ -7,7 +7,7 @@ class ShowItem extends Component {
     return (
       <tr>
         <td>
-        <Link to={`/product/${this.props.product.name}`}>  
+        <Link to={`/product/${this.props.product.id}`}>  
           <img height="50%"
           src={this.props.product.image} 
           alt={this.props.product.description}/>

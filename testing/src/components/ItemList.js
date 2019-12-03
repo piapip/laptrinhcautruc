@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Table, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+
 import ShowItem from './ShowItem';
+import AttributeList from './AttributeList';
 
 class ItemList extends Component {
   state = {
@@ -48,15 +50,7 @@ class ItemList extends Component {
         </ul>
         <ul>
           <Table borderless>
-            <thead>
-              <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Brand</th>
-                <th>Category</th>
-                <th>Price</th>
-              </tr>
-            </thead>
+            <AttributeList />
             <tbody>
               {printItem}
             </tbody>

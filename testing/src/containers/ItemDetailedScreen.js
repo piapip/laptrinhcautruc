@@ -13,9 +13,9 @@ class ItemDetailedScreen extends Component {
   }
 
   componentDidMount = () => {
-    let itemName = this.props.match.params.itemName
+    let itemId = this.props.match.params.itemId
     axios
-      .get(`${config.BACKEND_NHOM9}/api/db/products/name/${itemName}`)
+      .get(`${config.BACKEND_NHOM9}/api/db/products/id/${itemId}`)
       .then(data => {
         this.setState({ products: data.data })
       })
@@ -27,9 +27,11 @@ class ItemDetailedScreen extends Component {
       console.log("yopyop")
     } else {
       let userId = this.props.userId
-      let itemId = this.state.product.id
-      console.log(userId)
-      console.log(itemId)
+      let sessionId = this.props.sessionId
+      let itemId = this.state.products[0].id
+      console.log("User: " + userId)
+      console.log("sessionId: " + sessionId)
+      console.log("item: " + itemId)
     }
   }
 
