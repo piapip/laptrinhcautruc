@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import axios from 'axios'
+import config from '../config'
 
 import ShowItem from './ShowItem';
 import AttributeList from './AttributeList';
@@ -7,7 +9,16 @@ import AttributeList from './AttributeList';
 class ItemList extends Component {
   state = {
     currentPage: 1,
-    item_per_page: 3
+    item_per_page: 2
+  }
+
+  componentDidMount = () => {
+    axios
+      .get(`${config.NHOM7}`)
+      .then(data => {
+        this.setState({ item_per_page: data.data.item_per_page })
+      })
+      .catch(error => console.log(error))
   }
 
   setPage = (event) => {
