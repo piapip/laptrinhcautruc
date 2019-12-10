@@ -4,6 +4,7 @@ import axios from '../axios';
 import SearchSection from '../components/SearchSection';
 import Header from '../components/Header';
 import ItemList from '../components/ItemList'
+import Advertisement from '../components/Advertisement'
 import config from '../config'
 
 class HomeScreen extends Component {
@@ -31,6 +32,7 @@ class HomeScreen extends Component {
         <SearchSection />
         <ItemList 
           products = {this.state.products}/>
+        <Advertisement />
       </div>
     );
   }
