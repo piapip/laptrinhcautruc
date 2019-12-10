@@ -28,12 +28,10 @@ class ItemDetailedScreen extends Component {
       console.log("yopyop")
     } else {
       let userId = this.props.userId
-      let sessionId = this.props.sessionId
       let itemId = this.state.products[0].id
       axios
         .post(`${config.NHOM1}/api/carts`, {
           "user_id": userId,
-          "session_id": sessionId,
           "product_id": itemId
         })
         .then(data => {

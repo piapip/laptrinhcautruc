@@ -11,7 +11,9 @@ class Header extends Component {
         <Button >
           <a href={`${config.NHOM2}/logout?url=${config.BACKEND_NHOM9}/api`}>Logout</a>
         </Button>
-        <Button>Your cart</Button>
+        <Button>
+          <a href={`${config.NHOM1}/cart/${this.props.sessionId}&${this.props.userId}`}>Your cart</a>
+        </Button>
       </ButtonGroup>
     ) : (
       <ButtonGroup>
