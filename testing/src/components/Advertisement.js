@@ -15,7 +15,6 @@ class Advertisement extends Component {
       .then(data => {
         let advertisementList = data.data
         let random = Math.floor(Math.random() * advertisementList.length)
-        console.log(advertisementList[random])
         this.setState({ advertisement: advertisementList[random]})
       })
       .catch(error => console.log(error))

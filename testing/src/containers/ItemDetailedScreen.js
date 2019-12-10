@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Button, Alert } from 'reactstrap';
+import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 import axios from '../axios'
 import config from '../config'
 import ItemList from '../components/ItemList';
 import Header from '../components/Header'
+import Warning from '../components/Warning'
 
 class ItemDetailedScreen extends Component {
   state = {
@@ -42,11 +43,6 @@ class ItemDetailedScreen extends Component {
   }
 
   render() {
-    const message = this.state.message !== '' ? (
-      <Alert color="success">
-        {this.state.message}
-      </Alert>
-    ) : ""
     const addToCartButton = this.props.userId ? (
       <div>
         <Button onClick={this.addToCart}>Add to your cart</Button>
@@ -64,7 +60,8 @@ class ItemDetailedScreen extends Component {
           setSession = {this.props.setSession}
           userId={this.props.userId}
           sessionId={this.props.sessionId}/>
-        {message}
+        <Warning
+          message = {this.state.message}/>
         <ItemList 
           products={this.state.products}/>
         {addToCartButton}
