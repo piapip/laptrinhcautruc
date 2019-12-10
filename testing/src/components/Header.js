@@ -12,7 +12,7 @@ class Header extends Component {
           <a href={`${config.NHOM2}/logout?url=${config.BACKEND_NHOM9}/api`}>Logout</a>
         </Button>
         <Button>
-          <a href={`${config.NHOM1}/cart/${this.props.sessionId}&${this.props.userId}`}>Your cart</a>
+          <a href={`${config.NHOM1}/cart/${this.props.sessionId}&${this.props.userId}&${config.BACKEND_NHOM9SPEC}`}>Your cart</a>
         </Button>
       </ButtonGroup>
     ) : (
