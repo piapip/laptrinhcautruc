@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+import { Button, Alert } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 import axios from '../axios'
@@ -9,7 +9,8 @@ import Header from '../components/Header'
 
 class ItemDetailedScreen extends Component {
   state = {
-    products: []  
+    products: [],
+    message: ''  
   }
 
   componentDidMount = () => {
@@ -29,13 +30,25 @@ class ItemDetailedScreen extends Component {
       let userId = this.props.userId
       let sessionId = this.props.sessionId
       let itemId = this.state.products[0].id
-      console.log("User: " + userId)
-      console.log("sessionId: " + sessionId)
-      console.log("item: " + itemId)
+      axios
+        .post(`${config.NHOM1}/api/carts`, {
+          "user_id": userId,
+          "session_id": sessionId,
+          "product_id": itemId
+        })
+        .then(data => {
+          this.setState({ message: data.data.message })
+        })
+        .catch(error => console.log(error))
     }
   }
 
   render() {
+    const message = this.state.message !== '' ? (
+      <Alert color="success">
+        {this.state.message}
+      </Alert>
+    ) : ""
     const addToCartButton = this.props.userId ? (
       <div>
         <Button onClick={this.addToCart}>Add to your cart</Button>
@@ -53,6 +66,7 @@ class ItemDetailedScreen extends Component {
           setSession = {this.props.setSession}
           userId={this.props.userId}
           sessionId={this.props.sessionId}/>
+        {message}
         <ItemList 
           products={this.state.products}/>
         {addToCartButton}
